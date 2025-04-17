@@ -163,3 +163,6 @@ while True:
     # ganha 6
 
     # ADICIONA 1 E DIVIDE POR 2
+
+
+    ## VAI TOMA NO CU QU9INT
