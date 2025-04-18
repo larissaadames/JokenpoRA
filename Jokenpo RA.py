@@ -34,20 +34,28 @@ vitoriasJogador1 = 0
 vitoriasJogador2 = 0
 
 while True:
+
+    vitoriasJogador1 = 0
+    vitoriasJogador2 = 0
+
+    prosseguir = "1" # jeito que achei de fazer a pessoa digitar pra continuar em alguns diálogos, ele é definido aqui pois algumas lógicas quebrariam se ele nao fosse setado como 1 no começo do loop.
+
     print(f"\n\n=-=-=-=-=-=-=Eai! Bem vindo ao MELHOR JOKENPÔ DO PLANETA!!!!!=-=-=-=-=-=-=\n\n")
     print(f"-------> HUMANO X HUMANO - Quero batalhar com meu amiguinho >:) [1]\n")
     print(f"-------> HUMANO X MÁQUINA - Quero acabar com TODAS as máquinas!!! [2]\n")
     print(f"-------> MÁQUINA X MÁQUINA - Quero ver os robôs se detonando [3]\n")
     print(f"-------> TUTORIAL - Como que joga isso? Me ajuda pelo amor de Deus! [4]\n") # <- perguntar pra prof se pode botar um botão a mais de tutorial, ou se só mete o tutorial antes do jogo msm
     print(f"-------> SAIR - Eu quero sair, tô bem de boa, Valeu! ^^ [5]\n\n") 
+
     modo = input(f"Digite o número da sua escolha: ") # isso propositalmente é uma string, pra caso a pessoa digite algo errado o codigo nao quebrar
 
     if modo == "1": # modo player x player
+
         print(f"\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO X HUMANO=-=-=-=-=-=-=\n\n")
         nome1 = input(f"-------> Jogador 1, por favor digita o seu nome: ")
         nome2 = input(f"-------> Agora, Jogador 2, digita o seu nome aí também: ")
         print(f"\nPor último, {nome1} e {nome2}, vocês querem que o jogo acabe com quantas rodadas? Exemplo: Melhor de [3] rodadas, Melhor de [5] rodadas...") # <- Melhorar diálogo?
-
+        
         melhorDeQuantasRodadas = int(input(f"\n\n-------> Digite um número para a quantidade de Melhor de [___] rodadas: ")) # <- Melhorar diálogo? I
         # aqui infelizmente nao tem o que fazer, o usuário pode digitar uma string e cagar o código. com as opçoes que a prof nos deu, nao tem um jeito muito pratico de counterar isso :/
 
@@ -63,75 +71,49 @@ while True:
         # Eu não defino o "Melhor de Quantas Rodadas += 1" nessa parte anterior, pq eu queria colocar um diálogo especial, q precisa modificar a variavel depois daí.
 
         if melhorDeQuantasRodadas %2 != 0:
+
             rodadasPraGanhar = int((melhorDeQuantasRodadas + 1 )/2) # se for impar, calcula a quantidade de rodadas que alguém precisa ganhar para acabar
         else:
             rodadasPraGanhar = int((melhorDeQuantasRodadas + 2)/2) # se for par, calcula a quantidade de rodadas que alguém precisa ganhar para acabar
 
-        if melhorDeQuantasRodadas % 2 != 0 and melhorDeQuantasRodadas > 1 : # se o número for IMPAR e MAIOR QUE 1 entao roda o codigo normal
-            print(f"Beleza, vocês então vão jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
-            print(f"Boa Sorte {nome1} e {nome2}!")
-            time.sleep(3)
-            pass
-        
-        elif melhorDeQuantasRodadas % 2 == 0 and melhorDeQuantasRodadas > 1: # se o numero for PAR e MAIOR QUE 1, ele soma 1 no numero
-            melhorDeQuantasRodadas += 1
-            print(f"Beleza, eu dei uma ajustada pq o número tinha que ser ímpar, mas então vocês vão jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
-            print(f"Boa Sorte {nome1} e {nome2}!")
-            time.sleep(3)
-            pass
-
-        elif melhorDeQuantasRodadas == 1 : # se o numero for IGUAL A 1, tem esse diálogo especial
-            print(f"Então vocês vão jogar só uma rodada? Interessante! Que vença o melhor!!\n")
-            print(f"Boa Sorte {nome1} e {nome2}!")
-            time.sleep(3)
-            pass # pass passa adiante
-
-        elif melhorDeQuantasRodadas < 1: # se o numero for MENOR QUE UM, ele manda o pessoal de volta pro menu
-            print(f"\nVocês tão de sacanagem né? Esse número nem faz sentido! Que feio, {nome1} e {nome2}! Vou mandar vocês de volta para o menu >:(\nAguarde...")
-            time.sleep(3)
-            continue # continue reseta o loop
-        
-        print("\nJO")
-        time.sleep(0.5)
-        print("\nKEN")
-        time.sleep(0.5)
-        print("\nPÔ!")
-        time.sleep(0.5)
-
-        while vitoriasJogador1 or vitoriasJogador2 < rodadasPraGanhar: # roda esse código enquanto a quantidade vitorias de um dos jogadores for menor que a variavel rodadasPraGanhar
-
-            print(f"\n=-=-=Vamo lá!! {nome1}, não deixa o/a coleguinha {nome2} olhar a sua escolha hein!!=-=-=")
-            print("\n- [Pedra] ou [1]\n- [Papel] ou [2]\n- [Tesoura] ou [3]\n")
+        if melhorDeQuantasRodadas > 11:
+            print(f"\nCalma lá gente, vocês têm certeza que querem jogar tantas rodadas assim? Pode acabar demorando demais!")
+            time.sleep(1.5)
+            print("\nA gente quer continuar assim mesmo! [1]")
+            print("\nÉ verdade, acho melhor voltar pro menu![2]")
             
-            escolha1 = str(input(f"-------> {nome1}, digite qual você quer! ")).lower().strip()
+            prosseguir = input("\n-------> Digite a sua opção: ")
 
+        if prosseguir == "1":
+                
+            if melhorDeQuantasRodadas % 2 != 0 and melhorDeQuantasRodadas > 1 : # se o número for IMPAR e MAIOR QUE 1 entao roda o codigo normal
 
-            if escolha1 == "pedra" or escolha1 == "1":
-                escolha1 = "pedra"
-            elif escolha1 == "papel" or escolha1 == "2":
-                escolha1 = "papel"
-            elif escolha1 == "tesoura" or escolha1 == "3":
-                escolha1 = "tesoura"
-            else:
-                print(f"Calma lá né! {nome1}, você digitou errado sem querer ou tá brincando comigo? Vai de novo...")
+                print(f"Beleza, vocês então vão jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
+                print(f"Boa Sorte {nome1} e {nome2}!")
+                time.sleep(3)
+                pass
+            
+            elif melhorDeQuantasRodadas % 2 == 0 and melhorDeQuantasRodadas > 1: # se o numero for PAR e MAIOR QUE 1, ele soma 1 no numero
+                melhorDeQuantasRodadas += 1
+                print(f"Beleza, eu dei uma ajustada porque o número tinha que ser ímpar, mas então vocês vão jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
+                time.sleep(4.5)
+                print(f"Boa Sorte {nome1} e {nome2}!")
                 time.sleep(1.5)
-                continue
-            print(f"\n=-=-=Agora é a vez de {nome2}!! Não deixa {nome1} dar uma espiadinha hein ¬¬=-=-=")
-            print("\n- [Pedra] ou [1]\n- [Papel] ou [2]\n- [Tesoura] ou [3]\n")
-            
-            escolha2 = str(input(f"-------> {nome2}, digite qual você quer! ")).lower().strip()
+                pass
 
-            if escolha2 == "pedra" or escolha2 == "1":
-                escolha2 = "pedra"
-            elif escolha2 == "papel" or escolha2 == "2":
-                escolha2 = "papel"
-            elif escolha2 == "tesoura" or escolha2 == "3":
-                escolha2 = "tesoura"
-            else:
-                print(f"Calma lá né! {nome1}, você digitou errado sem querer ou tá brincando comigo? Vai de novo...")
-            
-            print(f"=-=-=Agora é a hora da verdade!=-=-=")
+            elif melhorDeQuantasRodadas == 1 : # se o numero for IGUAL A 1, tem esse diálogo especial
+                print(f"Então vocês vão jogar só uma rodada? Interessante! Que vença o melhor!!\n")
+                time.sleep(2)
+                print(f"Boa Sorte {nome1} e {nome2}!")
+                time.sleep(1)
+                pass # pass passa adiante
 
+
+            elif melhorDeQuantasRodadas < 1: # se o numero for MENOR QUE UM, ele manda o pessoal de volta pro menu
+                print(f"\nVocês tão de sacanagem né? Esse número nem faz sentido! Que feio, {nome1} e {nome2}! Vou mandar vocês de volta para o menu >:(\n")
+                prosseguir = input("Digita alguma coisa pra voltar pro menu >:(")
+                continue # continue reseta o loop
+            
             print("\nJO")
             time.sleep(0.5)
             print("\nKEN")
@@ -139,22 +121,86 @@ while True:
             print("\nPÔ!")
             time.sleep(0.5)
 
-            if escolha1 == "pedra" and escolha2 == "tesoura":
-                vitoriasJogador1 += 1
-            elif escolha1 == "papel" and escolha2 == "pedra":
-                vitoriasJogador1 += 1
-            elif escolha1 == "tesoura" and escolha2 == "papel":
-                vitoriasJogador1 += 1
-            elif escolha1 == escolha2:
-                print(f"Um empate! Vocês dois jogaram {escolha1}!")
-            else:
-                vitoriasJogador2 += 1
-            print("ta funcionando")
-            print(f"vitorias jogador1 {vitoriasJogador1}") # diálogos a modificar ainda
-            print(f"vitorias jogador2 {vitoriasJogador2}")
-            print(f"Lembrando que quem fizer {rodadasPraGanhar} vence hein!!")
+            while vitoriasJogador1 or vitoriasJogador2 < rodadasPraGanhar: # roda esse código enquanto a quantidade vitorias de um dos jogadores for menor que a variavel rodadasPraGanhar
+                
+                while True: # loop jogador1
 
-            # fazer input pra revelar a resposta
+                    print(f"\n=-=-=Vamo lá!! {nome1}, não deixa o/a coleguinha {nome2} olhar a sua escolha hein!!=-=-=")
+                    print("\n- [Pedra] ou [1]\n- [Papel] ou [2]\n- [Tesoura] ou [3]\n")
+                    
+                    escolha1 = str(input(f"-------> {nome1}, digite qual você quer! ")).lower().strip()
+
+                    if escolha1 == "pedra" or escolha1 == "1":
+                        escolha1 = "pedra"
+                        break
+                    elif escolha1 == "papel" or escolha1 == "2":
+                        escolha1 = "papel"
+                        break
+                    elif escolha1 == "tesoura" or escolha1 == "3":
+                        escolha1 = "tesoura"
+                        break
+                    else:
+                        print(f"Calma lá né! {nome1}, você digitou errado sem querer ou tá brincando comigo? Vai de novo...")
+                        time.sleep(1.5)
+                    continue
+
+                while True: # loop jogador2
+                    print(f"\n=-=-=Agora é a vez de {nome2}!! Não deixa {nome1} dar uma espiadinha, olha lá!!¬¬=-=-=")
+                    print("\n- [Pedra] ou [1]\n- [Papel] ou [2]\n- [Tesoura] ou [3]\n")
+                    
+                    escolha2 = str(input(f"-------> {nome2}, digite qual você quer! ")).lower().strip()
+
+                    if escolha2 == "pedra" or escolha2 == "1":
+                        escolha2 = "pedra"
+                        break
+                    elif escolha2 == "papel" or escolha2 == "2":
+                        escolha2 = "papel"
+                        break
+                    elif escolha2 == "tesoura" or escolha2 == "3":
+                        escolha2 = "tesoura"
+                        break
+                    else:
+                        print(f"Calma lá né! {nome2}, você digitou errado sem querer ou tá brincando comigo? Vai de novo...")
+                    
+                print(f"=-=-=Agora é a hora da verdade!=-=-=")
+
+                print("\nJO")
+                time.sleep(0.5)
+                print("\nKEN")
+                time.sleep(0.5)
+                print("\nPÔ!")
+                time.sleep(0.5)
+
+                if escolha1 == "pedra" and escolha2 == "tesoura":
+                    print(f"{nome2} \njoga tesoura, mas {nome1} de maneira muito sagaz a destrói com uma pedrada!")
+                    print(f"{nome1} ganhou a rodada!")
+                    vitoriasJogador1 += 1
+
+                elif escolha1 == "papel" and escolha2 == "pedra":
+                    
+                    print(f"{nome1} joga papel e amassa totalmente a pedra de {nome2}!")
+                    print(f"{nome1} ganhou a rodada!")
+                    vitoriasJogador1 += 1
+
+                elif escolha1 == "tesoura" and escolha2 == "papel":
+                    print(f"{nome2} arremessa o papel com muita força na direção de {nome1}, entretanto, {nome1} faz picadinhos do papel com sua tesoura.")
+                    print(f"{nome1} ganhou a rodada!")
+                    vitoriasJogador1 += 1
+
+                elif escolha1 == escolha2:
+                    print(f"Um empate! Vocês dois jogaram {escolha1}!")
+                else:
+                    vitoriasJogador2 += 1
+                print("ta funcionando")
+                print(f"vitorias jogador1 {vitoriasJogador1}") # diálogos a modificar ainda
+                print(f"vitorias jogador2 {vitoriasJogador2}")
+                print(f"Lembrando que quem fizer {rodadasPraGanhar} vence hein!!")
+
+                # fazer input pra revelar a resposta
+
+            else:
+                print("caiu no continue do else")
+                continue # isso aqui volta la no primeiro while, vai pro menu.
 
 
     elif modo == "2":
