@@ -36,7 +36,7 @@ pvpJogados = 0  # contabiliza jogador x jogador (player vs player)
 pveJogados = 0 # contabiliza jogador x máquina (player vs environment)
 eveJogados = 0 # contabiliza máquina x máquina (environment vs environment)
 
-escolhaDeNome = "abcd"
+escolhaDeNome = "0"
 
 while True:
 
@@ -56,27 +56,35 @@ while True:
     modo = input(f"Digite o número da sua opção: ") # isso propositalmente é uma string, pra caso a pessoa digite algo errado o codigo nao quebrar
 
     if modo == "1": # modo player x player
-        
+
         while True: # loop do modo 1 
+
+            vitoriasJogador1 = 0
+            vitoriasJogador2 = 0
+        
+            prosseguir = "1"
+            escolhaDeNome = "0" # 
             print(f"\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO X HUMANO=-=-=-=-=-=-=\n\n")
 
-            while pvpJogados == 0:
-                    
+            while pvpJogados == 0: # se já jogaram uma partida pvp, o usuario vai cair no else, que vai perguntar se querem trocar de nome ou nao.
+
                 nome1 = input(f"-------> Jogador 1, por favor digita o seu nome: ")
                 nome2 = input(f"-------> Agora, Jogador 2, digita o seu nome aí também: ")
-                print(f"\nPor último, {nome1} e {nome2}, vocês querem que o jogo acabe com quantas rodadas? Exemplo: Melhor de [3] rodadas, Melhor de [5] rodadas... Pode escolher qualquer número inteiro ímpar positivo!") # <- Melhorar diálogo?
                 break
-            else:
-                print(f"Eu lembro de vocês {nome1} e {nome2}, vocês querem continuar jogando com esses nomes ou vão trocar?")
-                print(f"-------> Queremos continuar com nossos nomes! [1]")
-                print(f"-------> Vamos trocar de nome, por favor! [2]")
-                escolhaDeNome = input("da a escolha")
-                if escolhaDeNome == "1":
-                    break
-                # pedir pra ele escolher a qtd de rodadas, e tbm acho q resetar la no final ou aqui no começo as variaveis de rodadas, se nao o jogo se autoencerra boa noite.
-                else:
-                    continue
 
+            else:
+                if escolhaDeNome == "0": # só entrará aqui se estiver como "0", q é definido no começo do loop acima
+                    print(f"Eu lembro de vocês {nome1} e {nome2}, vocês querem continuar jogando com esses nomes ou vão trocar?")
+                    print(f"-------> Queremos continuar com nossos nomes! [1]")
+                    print(f"-------> Vamos trocar de nome, por favor! [2]")
+                    escolhaDeNome = input("da a escolha")
+
+                    if escolhaDeNome == "2":
+                        nome1 = input(f"-------> Então tá, Jogador 1, por favor digita o seu novo nome: ")
+                        nome2 = input(f"-------> E você Jogador 2, o seu novo nome é: ")
+
+            
+            print(f"\nPor último, {nome1} e {nome2}, vocês querem que o jogo acabe com quantas rodadas? \nExemplo: Melhor de [3] rodadas, Melhor de [5] rodadas... Pode escolher qualquer número inteiro ímpar positivo!") # <- Melhorar diálogo?
             melhorDeQuantasRodadas = int(input(f"\n\n-------> Digite um número para a quantidade de Melhor de [___] rodadas: ")) # <- Melhorar diálogo? I
             # aqui infelizmente nao tem o que fazer, o usuário pode digitar uma string e cagar o código. com as opçoes que a prof nos deu, nao tem um jeito muito pratico de counterar isso :/
 
@@ -278,7 +286,7 @@ while True:
                 elif prosseguir == "2":
                     break                  
                 elif prosseguir == "3":
-                    pass
+                    pass  # ainda nao funciona
                 else:
                     break
         else:
