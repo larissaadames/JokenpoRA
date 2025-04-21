@@ -8,7 +8,8 @@
 #
 #   Mostrar pontuação dos jogadores no menu
 #
-#   Se o usuário já jogou o modo pvp, o programa lembra disso e pergunta se os jogadores querem trocar de nome.
+#   fazer modo facil medio e dificil no pve??
+#   quanto mais dificil mais chance a ia tem de ganhar
 #
 # ANOTAÇÕES
 #   
@@ -30,6 +31,10 @@ import os # clear no terminal
 
 nome1 = "default1" # essas variaveis nome1 e nome2 são usadas posteriormente para atribuir nomes aos jogadores.
 nome2 = "default2" # também sao usadas para verificar se o jogador trocou o nome ou não, mudando alguns diálogos.
+
+nomeIa1 = "Robôzaldo" # se sobrar tempo faz esses nomes aqui serem aleatórios, n precisa ter muita opção nao
+nomeIa2 = "QuadradoPerfeito"
+
 acabouDeNomear = False # feita pra perguntar se querem mudar de nome. fica positiva quando acabam de trocar, pra evitar ficar perguntando repetidas vezes em pouco tempo.
 
 modo = "abc"
@@ -247,6 +252,7 @@ while True:
                             break
                         else:
                             print(f"Calma lá né! {nome2}, você digitou errado sem querer ou tá brincando comigo? Vai de novo...")
+                            time.sleep(1.5)
                             continue
                         
                     print(f"=-=-=Agora é a hora da verdade!=-=-=")
@@ -358,6 +364,22 @@ while True:
 
     elif modo == "2":
         # modo 2, player x ia 
+        while True: # loop do modo 2
+            print("\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO x MÁQUINA=-=-=-=-=-=-=\n\n")
+
+            if acabouDeNomear == False:
+                nome1 = input("Tudo bem? Jogador(a), por favor digite o seu nome: ")
+                acabouDeNomear = True
+
+            # - talvez aqui botar o escolhedor de nome randômico da IA
+
+            print(f"\n\nAgora escolhe quantas rodadas você quer que o jogo tenha!\n Por exemplo, melhor de [3] rodadas, melhor de [5] rodadas,... Pode ser qualquer número inteiro ímpar positivo!")
+            melhorDeQuantasRodadas = int(input(f"\n\n-------> Digite um número para a quantidade de Melhor de [___] rodadas: "))
+
+            #vou dormir
+            
+
+
         # pôr um while com um timerzinho "pensando..." pra maquina responder
         pass
 
