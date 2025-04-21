@@ -11,8 +11,14 @@
 #   Se o usuário já jogou o modo pvp, o programa lembra disso e pergunta se os jogadores querem trocar de nome.
 #
 # ANOTAÇÕES
+#   
+#   Professora, enquanto fazia isso aqui fiquei em dúvida sobre qual é mais importante: É melhor que o código seja mais eficiente mas mais díficil de entender, ou
+#   menos eficiente mas mais fácil de entender?? 
+#   Tem coisas que eu poderia repetir mais vezes, ou mudar um pouco a estrutura, mas daí acho que acabaria criando muitas variáveis, ou só repetindo desnecessariamente mesmo
 #
-#      
+#   - dar clear direito quando jogarem 
+#   - polir diálogos, timings e testar varias possibilidades de sacanagem do usuario, ou caminhos naturais aleatorios
+#
 # ERROS:    
 # 
 #   Quando o usuário for optar pela quantidade de rodadas, ele pode digitar uma string e quebrar o código. Não sei oq fazer, pq a prof limitou nossos recursos pra usar outras coisas q counterariam isso
@@ -24,6 +30,9 @@ import os # clear no terminal
 
 nome1 = "default1" # essas variaveis nome1 e nome2 são usadas posteriormente para atribuir nomes aos jogadores.
 nome2 = "default2" # também sao usadas para verificar se o jogador trocou o nome ou não, mudando alguns diálogos.
+acabouDeNomear = False # feita pra perguntar se querem mudar de nome. fica positiva quando acabam de trocar, pra evitar ficar perguntando repetidas vezes em pouco tempo.
+
+modo = "abc"
 
 melhorDeQuantasRodadas = 3
 rodadasPraGanhar = int((melhorDeQuantasRodadas + 1 )/2)
@@ -35,15 +44,47 @@ partidasJogadas = 0 # contabiliza quantas partidas o usuário jogou no total
 pvpJogados = 0  # contabiliza jogador x jogador (player vs player)
 pveJogados = 0 # contabiliza jogador x máquina (player vs environment)
 eveJogados = 0 # contabiliza máquina x máquina (environment vs environment)
+permaVitoriasJogador1 = 0
+permaVitoriasJogador2 = 0
 
-escolhaDeNome = "0"
+escolhaDeNome = "0" # essa parte do codigo ta completamente uma bosta eu fiz numa confusao maluca tem que dar um revamp nessa joça
 
+terminar = False # nos fins dos jogos o usuario pode escolher pra sair do programa, aí isso aqui é definido como True, e no começo do loop principal é checado e da break pra acabar o programa
+voltarMenu = False # Alguns lugares o usuário quer voltar pro menu e fica mais organizado definir uma variavel só pra isso e ir mandando ele por if: {break}
 while True:
 
+    # definir algumas variaveis no inicio do menuloop:
     vitoriasJogador1 = 0
     vitoriasJogador2 = 0
 
     prosseguir = "1" # jeito que achei de fazer a pessoa digitar pra continuar em alguns diálogos, ele é definido aqui pois algumas lógicas quebrariam se ele nao fosse setado como 1 no começo do loop.
+    voltarMenu = False
+
+    if modo == "5": # sair do programa, deixei ele aqui pq quando alguem termina um modo e quer fechar o programa, a pessoa é jogada pro menu e cai aqui com o modo definido como "5"; tem que estar antes de tudo no código.
+        print("=-=-=-=-=-=-=Você escolheu SAIR=-=-=-=-=-=-=\n\n")
+
+        print(f"{pvpJogados} partidas JxJ jogadas!\n {pveJogados}partidas JxIA jogadas!\n {eveJogados} partidas IAxIA assistidas!")
+        
+
+        if nome1 == "default1" and nome2 == "default2": # se os nomes dos dois jogadores nao foram modificados
+            print(f"Você nem jogou direito e vai sair já?? Tá bom né, até mais!!!! :))\n\n")
+
+        elif nome2 == "default2": # se o nome do segundo jogador nao foi modificado
+            
+            print(f"\n\n| {nome1} ganhou {permaVitoriasJogador1} partidas em geral!")
+            print(f"Muito obrigado {nome1} por usar nosso programa de Jokenpô!!! Até mais!!!! :))\n\n")
+
+        else: # se os dois nomes foram modificados
+            
+            print(f"| {nome1} ganhou {permaVitoriasJogador1} partidas em geral!")
+            print(f"\n| {nome2} ganhou {permaVitoriasJogador2} partidas em geral!")
+            print(f"Muito obrigado {nome1} e {nome2} por usarem nosso programa de Jokenpô!!! Até mais!!!! :))\nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
+
+        
+        
+
+        break
+
 
     print(f"\n=-=-=-=-=-=-=Eai! Bem-vindo ao MELHOR JOKENPÔ DO PLANETA!!!!!=-=-=-=-=-=-=\n")
     print(f"-------> HUMANO X HUMANO - Quero batalhar com meu amiguinho >:) [1]\n")
@@ -66,22 +107,34 @@ while True:
             escolhaDeNome = "0" # 
             print(f"\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO X HUMANO=-=-=-=-=-=-=\n\n")
 
-            while pvpJogados == 0: # se já jogaram uma partida pvp, o usuario vai cair no else, que vai perguntar se querem trocar de nome ou nao.
-
-                nome1 = input(f"-------> Jogador 1, por favor digita o seu nome: ")
-                nome2 = input(f"-------> Agora, Jogador 2, digita o seu nome aí também: ")
+            if voltarMenu == True: # setado no fim da rodada se o usuário optou por voltar ao menu
                 break
 
-            else:
-                if escolhaDeNome == "0": # só entrará aqui se estiver como "0", q é definido no começo do loop acima
-                    print(f"Eu lembro de vocês {nome1} e {nome2}, vocês querem continuar jogando com esses nomes ou vão trocar?")
-                    print(f"-------> Queremos continuar com nossos nomes! [1]")
-                    print(f"-------> Vamos trocar de nome, por favor! [2]")
-                    escolhaDeNome = input("da a escolha")
+            while pvpJogados == 0: # se já jogaram uma partida pvp, o usuario vai cair no else, que vai perguntar se querem trocar de nome ou nao.
 
-                    if escolhaDeNome == "2":
-                        nome1 = input(f"-------> Então tá, Jogador 1, por favor digita o seu novo nome: ")
-                        nome2 = input(f"-------> E você Jogador 2, o seu novo nome é: ")
+                if acabouDeNomear == False: # pra evitar repetidas vezes de ficar perguntando o nome, caso algo faça o usuario voltar antes de começar o jogo
+                    nome1 = input(f"-------> Jogador 1, por favor digita o seu nome: ")
+                    nome2 = input(f"-------> Agora, Jogador 2, digita o seu nome aí também: ")
+                    acabouDeNomear = True
+                    break
+                else:
+                    break
+
+            else:
+
+                if acabouDeNomear == False: # pra evitar repetidas vezes de ficar perguntando o nome, caso algo faça o usuario voltar antes de começar o jogo
+
+                    if escolhaDeNome == "0": # só entrará aqui se estiver como "0", q é definido no começo do loop acima
+
+                        print(f"Eu lembro de vocês {nome1} e {nome2}, vocês querem continuar jogando com esses nomes ou vão trocar?")
+                        print(f"-------> Queremos continuar com nossos nomes! [1]")
+                        print(f"-------> Vamos trocar de nome, por favor! [2]")
+                        acabouDeNomear = True
+                        escolhaDeNome = input("da a escolha")
+
+                        if escolhaDeNome == "2":
+                            nome1 = input(f"-------> Então tá, Jogador 1, por favor digita o seu novo nome: ")
+                            nome2 = input(f"-------> E você Jogador 2, o seu novo nome é: ")
 
             
             print(f"\nPor último, {nome1} e {nome2}, vocês querem que o jogo acabe com quantas rodadas? \nExemplo: Melhor de [3] rodadas, Melhor de [5] rodadas... Pode escolher qualquer número inteiro ímpar positivo!") # <- Melhorar diálogo?
@@ -109,7 +162,7 @@ while True:
                 print(f"\nCalma lá gente, vocês têm certeza que querem jogar tantas rodadas assim? Pode acabar demorando demais!")
                 time.sleep(1.5)
                 print("\nA gente quer continuar assim mesmo! [1]")
-                print("\nÉ verdade, acho melhor voltar pro menu! [2]")
+                print("\nÉ verdade, acho melhor voltar! [2]")
                 
                 prosseguir = input("\n-------> Digite a sua opção: ")
 
@@ -120,7 +173,7 @@ while True:
                 if melhorDeQuantasRodadas % 2 != 0 and melhorDeQuantasRodadas > 1 : # se o número for IMPAR e MAIOR QUE 1 entao roda o codigo normal
 
                     print(f"Beleza, vocês então vão jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
-                    time.sleep(5)
+                    time.sleep(4)
                     print(f"Boa Sorte {nome1} e {nome2}!")
                     time.sleep(1.5)
                     pass
@@ -128,14 +181,14 @@ while True:
                 elif melhorDeQuantasRodadas % 2 == 0 and melhorDeQuantasRodadas > 1: # se o numero for PAR e MAIOR QUE 1, ele soma 1 no numero
                     melhorDeQuantasRodadas += 1
                     print(f"Beleza, eu dei uma ajustada porque o número tinha que ser ímpar, mas então vocês vão jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
-                    time.sleep(5)
+                    time.sleep(4)
                     print(f"Boa Sorte {nome1} e {nome2}!")
                     time.sleep(1.5)
                     pass
 
                 elif melhorDeQuantasRodadas == 1 : # se o numero for IGUAL A 1, tem esse diálogo especial
                     print(f"Então vocês vão jogar só uma rodada? Interessante! Que vença o melhor!!\n")
-                    time.sleep(4)
+                    time.sleep(3)
                     print(f"Boa Sorte {nome1} e {nome2}!")
                     time.sleep(1)
                     pass # pass passa adiante
@@ -144,6 +197,7 @@ while True:
                 elif melhorDeQuantasRodadas < 1: # se o numero for MENOR QUE UM, ele manda o pessoal de volta pro menu
                     print(f"\nVocês tão de sacanagem né? Esse número nem faz sentido! Que feio, {nome1} e {nome2}! Vou mandar vocês de volta para o menu >:(\n")
                     input("Digita alguma coisa pra voltar pro menu >:(")
+                    voltarMenu = True
                     continue
                 
                 print("\nJO")
@@ -274,19 +328,28 @@ while True:
                 prosseguir = "000"
                 partidasJogadas += 1
                 pvpJogados += 1
+                acabouDeNomear = False
 
-                print(f"Eai, vocês vão querer continuar jogando??")
-                print(f"Sim, bora de novo! [1]")
-                print(f"A gente quer voltar pro menu! [2]") # lembrar de adicionar valor pra mudar easter egg de fechar sem jogar
-                print(f"Já deu né, queremos sair do jogo! [3]")
-                prosseguir = input("-------> Por favor, escolha sua opção: ")
+                if vitoriasJogador1 > vitoriasJogador2: # dá vitórias "permanentes" aos jogadores, pra mostrar depois quando decidirem quitar no jogo, ou no menu mesmo
+                    permaVitoriasJogador1 += 1
+                elif vitoriasJogador2 > vitoriasJogador1:
+                    permaVitoriasJogador2 += 1
+                
+
+
+                print(f"\n=-=-=Eai, vocês vão querer continuar jogando??=-=-=")
+                print(f"\n---> Sim, bora de novo! [1]")
+                print(f"\n---> A gente quer voltar pro menu! [2]") # lembrar de adicionar valor pra mudar easter egg de fechar sem jogar
+                print(f"\n---> Já deu né, queremos sair do jogo! [3]")
+                prosseguir = input("\n-------> Por favor, escolha sua opção: ")
 
                 if prosseguir == "1":
-                    continue               # vc vai ter q botar isso tudo num while 
+                    continue
                 elif prosseguir == "2":
                     break                  
                 elif prosseguir == "3":
-                    pass  # ainda nao funciona
+                    modo = "5" # modo 5 é checado no começo do menu pra acabar com o programa
+                    break
                 else:
                     break
         else:
@@ -312,17 +375,6 @@ while True:
         prosseguir = input(f"Entendeu? Digite qualquer coisa para voltar ao menu! \n")
         continue # <- sera que a prof deixa usar isso aqui também? eu nao sei como voltar ao inicio do while sem ser assim
 
-    elif modo == "5": # sair do programa
-        print("=-=-=-=-=-=-=Você escolheu SAIR=-=-=-=-=-=-=\n\n")
-        if nome1 == "default1" and nome2 == "default2": # se os nomes dos dois jogadores nao foram modificados
-            print(f"Você nem jogou direito e vai sair já?? Tá bom né, até mais!!!! :))\n\n")
-
-        elif nome2 == "default2": # se o nome do segundo jogador nao foi modificado
-            print(f"Muito obrigado {nome1} por usar nosso programa de Jokenpô!!! Até mais!!!! :))\n\n")
-
-        else: # se os dois nomes foram modificados
-            print(f"Muito obrigado {nome1} e {nome2} por usarem nosso programa de Jokenpô!!! Até mais!!!! :))\n\n")
-        break
     else:
         print("\n\nDigita alguma coisa válida né!! Tá achando que eu tenho cara de palhaço?\n")
         input("Escreva alguma coisa para continuar: \n")
