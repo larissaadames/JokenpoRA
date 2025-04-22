@@ -20,6 +20,8 @@
 #   - dar clear direito quando jogarem 
 #   - polir diálogos, timings e testar varias possibilidades de sacanagem do usuario, ou caminhos naturais aleatorios
 #
+#   - talvez separar os nomes pra cada modo
+#
 # ERROS:    
 # 
 #   Quando o usuário for optar pela quantidade de rodadas, ele pode digitar uma string e quebrar o código. Não sei oq fazer, pq a prof limitou nossos recursos pra usar outras coisas q counterariam isso
@@ -44,15 +46,19 @@ rodadasPraGanhar = int((melhorDeQuantasRodadas + 1 )/2)
 
 vitoriasJogador1 = 0
 vitoriasJogador2 = 0
+vitoriasIa1 = 0
+vitoriasIa2= 0
 
 partidasJogadas = 0 # contabiliza quantas partidas o usuário jogou no total
 pvpJogados = 0  # contabiliza jogador x jogador (player vs player)
 pveJogados = 0 # contabiliza jogador x máquina (player vs environment)
 eveJogados = 0 # contabiliza máquina x máquina (environment vs environment)
-permaVitoriasJogador1 = 0
-permaVitoriasJogador2 = 0
+permaVitoriasPvPJogador1 = 0
+permaVitoriasPvPJogador2 = 0
+permaVitoriasPvEJogador1 = 0
+permaDerrotasPvEJogador1 = 0
 
-escolhaDeNome = "0" # essa parte do codigo ta completamente uma bosta eu fiz numa confusao maluca tem que dar um revamp nessa joça
+decisaoEscolhaDeNome = "0" # essa parte do codigo ta completamente uma bosta eu fiz numa confusao maluca tem que dar um revamp nessa joça
 
 terminar = False # nos fins dos jogos o usuario pode escolher pra sair do programa, aí isso aqui é definido como True, e no começo do loop principal é checado e da break pra acabar o programa
 voltarMenu = False # Alguns lugares o usuário quer voltar pro menu e fica mais organizado definir uma variavel só pra isso e ir mandando ele por if: {break}
@@ -61,14 +67,23 @@ while True:
     # definir algumas variaveis no inicio do menuloop:
     vitoriasJogador1 = 0
     vitoriasJogador2 = 0
-
     prosseguir = "1" # jeito que achei de fazer a pessoa digitar pra continuar em alguns diálogos, ele é definido aqui pois algumas lógicas quebrariam se ele nao fosse setado como 1 no começo do loop.
     voltarMenu = False
 
     if modo == "5": # sair do programa, deixei ele aqui pq quando alguem termina um modo e quer fechar o programa, a pessoa é jogada pro menu e cai aqui com o modo definido como "5"; tem que estar antes de tudo no código.
-        print("=-=-=-=-=-=-=Você escolheu SAIR=-=-=-=-=-=-=\n\n")
+        print("\n=-=-=-=-=-=-=Você escolheu SAIR=-=-=-=-=-=-=\n")
 
-        print(f"{pvpJogados} partidas JxJ jogadas!\n {pveJogados}partidas JxIA jogadas!\n {eveJogados} partidas IAxIA assistidas!")
+        print(f"| {pvpJogados} partidas JxJ jogadas!")
+        print(f"    {nome1} ganhou {permaVitoriasPvPJogador1}")
+        print(f"    {nome2} ganhou {permaVitoriasPvPJogador2}")
+
+        print(f"\n| {pveJogados} partidas JxIA jogadas!")
+        print(f"    {nome1} ganhou {permaVitoriasPvEJogador1}")
+        print(f"    {nome1} perdeu {permaDerrotasPvEJogador1}") 
+
+        print(f"\n| {eveJogados} partidas IAxIA assistidas!")
+        print(f"    {nome1} ganhou tantas apostas")
+        print(f"    {nome1} perdeu tantas apostas") 
         
 
         if nome1 == "default1" and nome2 == "default2": # se os nomes dos dois jogadores nao foram modificados
@@ -76,14 +91,14 @@ while True:
 
         elif nome2 == "default2": # se o nome do segundo jogador nao foi modificado
             
-            print(f"\n\n| {nome1} ganhou {permaVitoriasJogador1} partidas em geral!")
+            print(f"\n\n| {nome1} ganhou {permaVitoriasPvPJogador1} partidas em geral!")
             print(f"Muito obrigado {nome1} por usar nosso programa de Jokenpô!!! Até mais!!!! :))\n\n")
 
         else: # se os dois nomes foram modificados
             
-            print(f"| {nome1} ganhou {permaVitoriasJogador1} partidas em geral!")
-            print(f"\n| {nome2} ganhou {permaVitoriasJogador2} partidas em geral!")
-            print(f"Muito obrigado {nome1} e {nome2} por usarem nosso programa de Jokenpô!!! Até mais!!!! :))\nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
+            print(f"| {nome1} ganhou {permaVitoriasPvPJogador1} partidas em geral!")
+            print(f"\n| {nome2} ganhou {permaVitoriasPvPJogador2} partidas em geral!")
+            print(f"Muito obrigado {nome1} e {nome2} por usarem nosso programa de Jokenpô!!! Até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
 
         
         
@@ -107,9 +122,9 @@ while True:
 
             vitoriasJogador1 = 0
             vitoriasJogador2 = 0
-        
             prosseguir = "1"
-            escolhaDeNome = "0" # 
+            decisaoEscolhaDeNome = "0" 
+
             print(f"\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO X HUMANO=-=-=-=-=-=-=\n\n")
 
             if voltarMenu == True: # setado no fim da rodada se o usuário optou por voltar ao menu
@@ -129,15 +144,15 @@ while True:
 
                 if acabouDeNomear == False: # pra evitar repetidas vezes de ficar perguntando o nome, caso algo faça o usuario voltar antes de começar o jogo
 
-                    if escolhaDeNome == "0": # só entrará aqui se estiver como "0", q é definido no começo do loop acima
+                    if decisaoEscolhaDeNome == "0": # só entrará aqui se estiver como "0", q é definido no começo do loop acima
 
                         print(f"Eu lembro de vocês {nome1} e {nome2}, vocês querem continuar jogando com esses nomes ou vão trocar?")
                         print(f"-------> Queremos continuar com nossos nomes! [1]")
                         print(f"-------> Vamos trocar de nome, por favor! [2]")
                         acabouDeNomear = True
-                        escolhaDeNome = input("da a escolha")
+                        decisaoEscolhaDeNome = input("da a escolha")
 
-                        if escolhaDeNome == "2":
+                        if decisaoEscolhaDeNome == "2":
                             nome1 = input(f"-------> Então tá, Jogador 1, por favor digita o seu novo nome: ")
                             nome2 = input(f"-------> E você Jogador 2, o seu novo nome é: ")
 
@@ -171,7 +186,7 @@ while True:
                 
                 prosseguir = input("\n-------> Digite a sua opção: ")
 
-            if prosseguir == "1":
+            if prosseguir == "1": # se o usuário escolher uma quantidade de rodadas muito grande, ele pergunta se quer prosseguir, por isso existe isso aqui
 
                 print("\n" * 100)
 
@@ -265,7 +280,7 @@ while True:
                     time.sleep(0.5)
 
                     if escolha1 == "pedra" and escolha2 == "tesoura":
-                        print(f"\n{nome2} joga tesoura, mas {nome1} de maneira muito sagaz a destrói com uma pedrada!")
+                        print(f"\n{nome2} joga TESOURA, mas {nome1} de maneira muito sagaz a destrói com uma PEDRADA!")
                         time.sleep(2.5)
                         print(f"{nome1} ganhou a rodada!")
                         time.sleep(0.5)
@@ -273,39 +288,39 @@ while True:
 
                     elif escolha1 == "papel" and escolha2 == "pedra":
                         
-                        print(f"\n{nome1} joga papel e amassa totalmente a pedra de {nome2}!")
+                        print(f"\n{nome1} joga PAPEL e amassa totalmente a PEDRA de {nome2}!")
                         time.sleep(2.5)
                         print(f"{nome1} ganhou a rodada!")
                         time.sleep(0.5)
                         vitoriasJogador1 += 1
 
                     elif escolha1 == "tesoura" and escolha2 == "papel":
-                        print(f"\n{nome2} arremessa o papel com muita força na direção de {nome1}, entretanto, {nome1} faz picadinhos do papel com sua tesoura.")
+                        print(f"\n{nome2} arremessa o PAPEL com muita força na direção de {nome1}, entretanto, {nome1} faz picadinhos do PAPEL com sua TESOURA.")
                         time.sleep(2.5)
                         print(f"\n{nome1} ganhou a rodada!")
                         time.sleep(0.5)
                         vitoriasJogador1 += 1
 
                     elif escolha1 == escolha2:
-                        print(f"\nUm empate! Vocês dois jogaram {escolha1}!")
+                        print(f"\nUm empate! Vocês dois jogaram {escolha1.upper()}!")
                         time.sleep(2.5)
 
                     elif escolha2 == "pedra" and escolha1 == "tesoura":
-                        print(f"\n{nome2} joga pedra e arrebenta com a tesoura de {nome1}!!")
+                        print(f"\n{nome2} joga PEDRA e arrebenta com a TESOURA de {nome1}!!")
                         time.sleep(2.5)
                         print(f"\n{nome2} ganhou a rodada!")
                         time.sleep(0.5)
                         vitoriasJogador2 += 1
 
                     elif escolha2 == "papel" and escolha1 == "pedra":
-                        print(f"{nome1} joga uma pedra com o intuito de acertar {nome2}. {nome2} envolve a pedra com um papel muito bem posicionado e vence a rodada.")
+                        print(f"{nome1} joga uma PEDRA com o intuito de acertar {nome2}. {nome2} envolve a PEDRA com um PAPEL muito bem posicionado e vence a rodada.")
                         time.sleep(3.0)
                         print(f"\n{nome2} ganhou a rodada!")
                         time.sleep(0.5)
                         vitoriasJogador2 += 1
 
                     elif escolha2 == "tesoura" and "papel":
-                        print(f"com sua tesoura afiadíssima, {nome2} tritura o papel de {nome1}")
+                        print(f"com sua tesoura afiadíssima, {nome2} tritura o PAPEL de {nome1}")
                         time.sleep(2.5)
                         print(f"\n{nome2} ganhou a rodada!")
                         time.sleep(0.5)
@@ -337,25 +352,28 @@ while True:
                 acabouDeNomear = False
 
                 if vitoriasJogador1 > vitoriasJogador2: # dá vitórias "permanentes" aos jogadores, pra mostrar depois quando decidirem quitar no jogo, ou no menu mesmo
-                    permaVitoriasJogador1 += 1
+                    permaVitoriasPvPJogador1 += 1
                 elif vitoriasJogador2 > vitoriasJogador1:
-                    permaVitoriasJogador2 += 1
+                    permaVitoriasPvPJogador2 += 1
                 
 
 
                 print(f"\n=-=-=Eai, vocês vão querer continuar jogando??=-=-=")
                 print(f"\n---> Sim, bora de novo! [1]")
-                print(f"\n---> A gente quer voltar pro menu! [2]") # lembrar de adicionar valor pra mudar easter egg de fechar sem jogar
+                print(f"\n---> A gente quer voltar pro menu! [2]")
                 print(f"\n---> Já deu né, queremos sair do jogo! [3]")
                 prosseguir = input("\n-------> Por favor, escolha sua opção: ")
 
                 if prosseguir == "1":
                     continue
+
                 elif prosseguir == "2":
-                    break                  
+                    break     
+
                 elif prosseguir == "3":
                     modo = "5" # modo 5 é checado no começo do menu pra acabar com o programa
                     break
+
                 else:
                     break
         else:
@@ -365,19 +383,239 @@ while True:
     elif modo == "2":
         # modo 2, player x ia 
         while True: # loop do modo 2
+
+            vitoriasJogador1 = 0
+            vitoriasIa1 = 0
+
             print("\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO x MÁQUINA=-=-=-=-=-=-=\n\n")
 
+
+            if voltarMenu == True: # setado no fim da rodada se o usuário optou por voltar ao menu
+                break
+        
             if acabouDeNomear == False:
                 nome1 = input("Tudo bem? Jogador(a), por favor digite o seu nome: ")
                 acabouDeNomear = True
 
             # - talvez aqui botar o escolhedor de nome randômico da IA
 
-            print(f"\n\nAgora escolhe quantas rodadas você quer que o jogo tenha!\n Por exemplo, melhor de [3] rodadas, melhor de [5] rodadas,... Pode ser qualquer número inteiro ímpar positivo!")
+            print(f"\n\nAgora escolhe quantas rodadas você quer que o jogo tenha!\nPor exemplo, melhor de [3] rodadas, melhor de [5] rodadas,... Pode ser qualquer número inteiro ímpar positivo!")
             melhorDeQuantasRodadas = int(input(f"\n\n-------> Digite um número para a quantidade de Melhor de [___] rodadas: "))
 
-            #vou dormir
-            
+            if melhorDeQuantasRodadas %2 != 0:
+
+                rodadasPraGanhar = int((melhorDeQuantasRodadas + 1 )/2) # se for impar, calcula a quantidade de rodadas que alguém precisa ganhar para acabar
+            else:
+                rodadasPraGanhar = int((melhorDeQuantasRodadas + 2)/2) # se for par, calcula a quantidade de rodadas que alguém precisa ganhar para acabar
+
+            if melhorDeQuantasRodadas >= 10:
+                print(f"\nCalma lá {nome1}, você tem certeza que quer jogar tantas rodadas assim? Pode acabar demorando demais!")
+                time.sleep(1.5)
+                print("\nEu quero continuar assim mesmo! [1]")
+                print("\nÉ verdade, acho melhor voltar! [2]")
+
+                prosseguir = input("\n-------> Digite a sua opção: ")
+
+            if prosseguir == "1": # se o usuário escolher uma quantidade de rodadas muito grande, ele pergunta se quer prosseguir, por isso existe isso aqui
+
+                print("\n" * 100)
+
+                if melhorDeQuantasRodadas % 2 != 0 and melhorDeQuantasRodadas > 1 : # se o número for IMPAR e MAIOR QUE 1 entao roda o codigo normal
+
+                    print(f"Beleza, você então vai jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
+                    time.sleep(4)
+                    print(f"Boa Sorte {nome1}, você irá batalhar contra a MÁQUINA {nomeIa1}!")
+                    time.sleep(1.5)
+                    pass
+                
+                elif melhorDeQuantasRodadas % 2 == 0 and melhorDeQuantasRodadas > 1: # se o numero for PAR e MAIOR QUE 1, ele soma 1 no numero
+                    melhorDeQuantasRodadas += 1
+                    print(f"Beleza, eu dei uma ajustada porque o número tinha que ser ímpar, mas então você vãi jogar um Melhor de {melhorDeQuantasRodadas}, ou seja, quem fizer {rodadasPraGanhar} primeiro vence!\n")
+                    time.sleep(4)
+                    print(f"Boa Sorte {nome1}, você irá batalhar contra a MÁQUINA {nomeIa1}!")
+                    time.sleep(1.5)
+                    pass
+
+                elif melhorDeQuantasRodadas == 1 : # se o numero for IGUAL A 1, tem esse diálogo especial
+                    print(f"Então você quer jogar só uma rodada? Interessante! Que vença o melhor!!\n")
+                    time.sleep(3)
+                    print(f"Boa Sorte {nome1}, você irá batalhar contra a MÁQUINA {nomeIa1}!")
+                    time.sleep(1)
+                    pass # pass passa adiante
+
+
+                elif melhorDeQuantasRodadas < 1: # se o numero for MENOR QUE UM, ele manda o pessoal de volta pro menu
+                    print(f"\nVocê tá de sacanagem né? Esse número nem faz sentido! Que feio {nome1}! Vou te mandar de volta pro menu >:(\n")
+                    input("Digita alguma coisa pra voltar pro menu >:(")
+                    voltarMenu = True
+                    continue
+                    
+                print("\nJO")
+                time.sleep(0.5)
+                print("\nKEN")
+                time.sleep(0.5)
+                print("\nPÔ!")
+                time.sleep(0.5)
+
+                while vitoriasJogador1 < rodadasPraGanhar and vitoriasIa1 < rodadasPraGanhar:
+
+                    while True: # loop do jogador
+                    
+                        print(f"\n=-=-=Vamo lá!! {nome1}, será que você consegue ganhar das MÁQUINAS??=-=-=")
+                        print("\n- [Pedra] ou [1]\n- [Papel] ou [2]\n- [Tesoura] ou [3]\n")
+
+                        escolha1 = str(input(f"-------> {nome1}, digite qual você quer! ")).lower().strip()
+
+                        if escolha1 == "pedra" or escolha1 == "1":
+                            escolha1 = "pedra"
+                            break
+                        elif escolha1 == "papel" or escolha1 == "2":
+                            escolha1 = "papel"
+                            break
+                        elif escolha1 == "tesoura" or escolha1 == "3":
+                            escolha1 = "tesoura"
+                            break
+                        else:
+                            print(f"\nCalma lá né! {nome1}, você digitou errado sem querer ou tá brincando comigo? Vai de novo...")
+                            time.sleep(2)
+                            continue
+
+                    print(f"Agora meu comparça {nomeIa1} vai decidir qual jogar, que vença o melhor!")
+
+                    time.sleep(2)
+
+                    escolhaIa1 = random.randint(1,3) # vai gerar um numero aleatorio sendo 1, 2 ou 3
+
+                    if escolhaIa1 == 1: # define como pedra, papel, ou tesoura pra facilitar a readability
+                        escolhaIa1 = "pedra"
+                    elif escolhaIa1 == 2:
+                        escolhaIa1 = "papel"
+                    else:
+                        escolhaIa1 = "tesoura"
+
+                    print(f"a MÁQUINA {nomeIa1} está pensando...")
+                    time.sleep(random.uniform(1,2)) # random.random() gera um valor entre 0.0 e 1.0, random.uniform(a,b) faz entre dois valores a e b
+                    print("...")
+                    time.sleep(random.uniform(1,2))
+                    print("...")
+                    time.sleep(random.uniform(1,2))
+                    print("...")
+                    time.sleep(random.uniform(1,2))
+
+                    print(f"=-=-=Agora é a hora da verdade!=-=-=")
+
+                    print("\nJO")
+                    time.sleep(0.5)
+                    print("\nKEN")
+                    time.sleep(0.5)
+                    print("\nPÔ!")
+                    time.sleep(1.2)
+
+                    
+
+                    print(f"a MÁQUINA escolheu {escolhaIa1}!")
+
+                    time.sleep(1.5)
+
+                    if escolha1 == "pedra" and escolhaIa1 == "tesoura": #vitorias humano
+                        print(f"{nome1} joga PEDRA e destrói completamente a TESOURA da MÁQUINA {nomeIa1}")
+                        time.sleep(3)
+                        print(f"{nome1} ganhou a rodada!")
+                        time.sleep(1)
+                        vitoriasJogador1 += 1
+
+                    elif escolha1 == "papel" and escolhaIa1 == "pedra":
+                        print(f"{nome1} manda um PAPEL e envolve com precisão a PEDRA da MÁQUINA {nomeIa1}")
+                        time.sleep(3)
+                        print(f"{nome1} ganhou a rodada!")
+                        time.sleep(1)
+                        vitoriasJogador1 += 1
+
+                    elif escolha1 == "tesoura" and escolhaIa1 == "papel":
+                        print(f"{nome1} usa a TESOURA e faz picadinhos do PAPEL da MÁQUINA {nomeIa1} ")
+                        time.sleep(3)
+                        print(f"{nome1} ganhou a rodada!")
+                        time.sleep(1)
+                        vitoriasJogador1 += 1
+
+                    elif escolhaIa1 == "pedra" and escolha1 == "tesoura": #vitorias IA
+                        print(f"a MÁQUINA {nomeIa1} jogou uma PEDRA muito bem dada e acabou com a TESOURA de {nome1}")
+                        time.sleep(3)
+                        print(f"a MÁQUINA {nomeIa1} ganhou a rodada!")
+                        time.sleep(1)
+                        vitoriasIa1 += 1
+
+                    elif escolhaIa1 == "papel" and escolha1 == "pedra":
+                        print(f"a MÁQUINA {nomeIa1} jogou PAPEL e se protegeu completamente da PEDRA de {nome1}")
+                        time.sleep(3)
+                        print(f"a MÁQUINA {nomeIa1} ganhou a rodada!")
+                        time.sleep(1)
+                        vitoriasIa1 += 1
+
+                    elif escolhaIa1 == "tesoura" and escolha1 == "papel":
+                        print(f"a MÁQUINA {nomeIa1} jogou TESOURA e cortou completamente o PAPEL de {nome1}")
+                        time.sleep(3)
+                        print(f"a MÁQUINA {nomeIa1} ganhou a rodada!")
+                        time.sleep(1)
+                        vitoriasIa1 += 1
+
+                    elif escolha1 == escolhaIa1:
+                        print(f"Vocês dois jogaram {escolha1.upper()}!")
+                        time.sleep(1.5)
+                        print(f"Foi um empate!")
+                        time.sleep(1)
+
+                    print(f"\n=-=-=PLACAR=-=-=") # placar
+                    print(f"\n| {nome1}: {vitoriasJogador1}")
+                    print(f"\n| {nomeIa1}: {vitoriasIa1}")
+                    print(f"\nMeta: {rodadasPraGanhar}")
+                    print(f"\n=-=-=--=--=-=-=\n")
+
+                    if vitoriasJogador1 == rodadasPraGanhar: # Textinho embaixo do placar que diz a situação comparando as vitórias dos jogadores
+                        print(f"\n{nome1} ganhou! Você foi capaz de derrotar a MÁQUINA {nomeIa1}, parabéns!")
+                    elif vitoriasIa1 == rodadasPraGanhar:
+                        print(f"\nNão foi dessa vez {nome1}, você não foi PÁREO contra a MÁQUINA {nomeIa1}! kkkkkk melhore")
+                    elif vitoriasJogador1 > vitoriasIa1: 
+                        print(f"{nome1} está na frente!")
+                    elif vitoriasIa1 > vitoriasJogador1:
+                        print(f"{nomeIa1} está na frente!")
+                    else:
+                        print(f"Está empatado!")
+                    
+                    input("\nDigite algo para continuar: ")
+
+                prosseguir = "000"       # essa seção aqui define e modifica valores pra contribuir pras estatísticas, e pro funcionamento do programa também
+                partidasJogadas += 1
+                pveJogados += 1
+                acabouDeNomear = False
+
+                if vitoriasJogador1 > vitoriasIa1: # dá vitóriasPvE "permanentes" ao jogador
+                    permaVitoriasPvEJogador1 += 1
+
+                elif vitoriasIa1 > vitoriasJogador1: # dá derrotasPvE "permanentes" ao
+                    permaDerrotasPvEJogador1 += 1
+
+                print(f"\n=-=-=Eai {nome1}, vai querer continuar jogando??=-=-=")
+                print(f"\n---> Sim, eu quero jogar de novo! [1]")
+                print(f"\n---> Eu quero voltar pro menu! [2]")
+                print(f"\n---> Na verdade eu quero sair do jogo! [3]")
+                prosseguir = input("\n-------> Por favor, escolha sua opção: ")
+
+                if prosseguir == "1":
+                    continue
+
+                elif prosseguir == "2":
+                    break                  
+
+                elif prosseguir == "3":
+                    modo = "5" # modo 5 é checado no começo do menu pra acabar com o programa
+                    break
+                else:
+                    break
+
+
+
+
 
 
         # pôr um while com um timerzinho "pensando..." pra maquina responder
@@ -385,6 +623,7 @@ while True:
 
     elif modo == "3":
         # modo 3, ia x ia
+        # fazer opçao de apostas
         pass
 
     elif modo == "4": # modo 4, tutorial
@@ -400,3 +639,4 @@ while True:
     else:
         print("\n\nDigita alguma coisa válida né!! Tá achando que eu tenho cara de palhaço?\n")
         input("Escreva alguma coisa para continuar: \n")
+
