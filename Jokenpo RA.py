@@ -63,59 +63,27 @@ querRenomearPvE = "0"
 
 terminar = False # nos fins dos jogos o usuario pode escolher pra sair do programa, aí isso aqui é definido como True, e no começo do loop principal é checado e da break pra acabar o programa
 voltarMenu = False # Alguns lugares o usuário quer voltar pro menu e fica mais organizado definir uma variavel só pra isso e ir mandando ele por if: {break}
-while True:
+
+
+print(f"\n=-=-=-=-=-=-=Eai! Bem-vindo ao MELHOR JOKENPÔ DO PLANETA!!!!!=-=-=-=-=-=-=\n")
+print(f"-------> HUMANO X HUMANO - Quero batalhar com meu amiguinho >:) [1]\n")
+print(f"-------> HUMANO X MÁQUINA - Quero acabar com TODAS as máquinas!!! [2]\n")
+print(f"-------> MÁQUINA X MÁQUINA - Quero ver os robôs se detonando [3]\n")
+print(f"-------> TUTORIAL - Como que joga isso? Me ajuda pelo amor de Deus! [4]\n") # <- perguntar pra prof se pode botar um botão a mais de tutorial, ou se só mete o tutorial antes do jogo msm
+print(f"-------> SAIR - Eu quero sair, tô bem de boa, Valeu! ^^ [5]\n") 
+print(f"=-=-=-=-=-=-=-==--===-====-=====-========-=====-====-===--==-=-=-=-=-=-=-=\n")
+
+modo = input(f"Digite o número da sua opção: ").strip() # isso propositalmente é uma string, pra caso a pessoa digite algo errado o codigo nao quebrar
+
+while modo != "5":
 
     # definir algumas variaveis no inicio do menuloop:
     vitoriasJogador1 = 0
     vitoriasJogador2 = 0
     prosseguir = "1" # jeito que achei de fazer a pessoa digitar pra continuar em alguns diálogos, ele é definido aqui pois algumas lógicas quebrariam se ele nao fosse setado como 1 no começo do loop.
+
     voltarMenu = False
 
-    if modo == "5": # sair do programa, deixei ele aqui pq quando alguem termina um modo e quer fechar o programa, a pessoa é jogada pro menu e cai aqui com o modo definido como "5"; tem que estar antes de tudo no código.
-        print("\n=-=-=-=-=-=-=Você escolheu SAIR=-=-=-=-=-=-=\n")
-
-        print(f"| {pvpJogados} partidas JxJ jogadas!")
-        print(f"    {nome1} ganhou {permaVitoriasPvPJogador1}")
-        print(f"    {nome2} ganhou {permaVitoriasPvPJogador2}")
-
-        print(f"\n| {pveJogados} partidas JxIA jogadas!")
-        print(f"    {nome1} ganhou {permaVitoriasPvEJogador1}")
-        print(f"    {nome1} perdeu {permaDerrotasPvEJogador1}") 
-
-        print(f"\n| {eveJogados} partidas IAxIA assistidas!")
-        print(f"    {nome1} ganhou tantas apostas")
-        print(f"    {nome1} perdeu tantas apostas") 
-        
-
-        if nome1 == "default1" and nome2 == "default2": # se os nomes dos dois jogadores nao foram modificados
-            print(f"Você nem jogou direito e vai sair já?? Tá bom né, até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
-
-        elif nome2 == "default2": # se o nome do segundo jogador nao foi modificado
-            
-            print(f"\n\n| {nome1} ganhou {permaVitoriasPvPJogador1} partidas em geral!")
-            print(f"Muito obrigado {nome1} por usar nosso programa de Jokenpô!!! Até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
-
-        else: # se os dois nomes foram modificados
-            
-            print(f"| {nome1} ganhou {permaVitoriasPvPJogador1} partidas em geral!")
-            print(f"\n| {nome2} ganhou {permaVitoriasPvPJogador2} partidas em geral!")
-            print(f"Muito obrigado {nome1} e {nome2} por usarem nosso programa de Jokenpô!!! Até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
-
-        
-        
-
-        break
-
-
-    print(f"\n=-=-=-=-=-=-=Eai! Bem-vindo ao MELHOR JOKENPÔ DO PLANETA!!!!!=-=-=-=-=-=-=\n")
-    print(f"-------> HUMANO X HUMANO - Quero batalhar com meu amiguinho >:) [1]\n")
-    print(f"-------> HUMANO X MÁQUINA - Quero acabar com TODAS as máquinas!!! [2]\n")
-    print(f"-------> MÁQUINA X MÁQUINA - Quero ver os robôs se detonando [3]\n")
-    print(f"-------> TUTORIAL - Como que joga isso? Me ajuda pelo amor de Deus! [4]\n") # <- perguntar pra prof se pode botar um botão a mais de tutorial, ou se só mete o tutorial antes do jogo msm
-    print(f"-------> SAIR - Eu quero sair, tô bem de boa, Valeu! ^^ [5]\n") 
-    print(f"=-=-=-=-=-=-=-==--===-====-=====-========-=====-====-===--==-=-=-=-=-=-=-=\n")
-
-    modo = input(f"Digite o número da sua opção: ") # isso propositalmente é uma string, pra caso a pessoa digite algo errado o codigo nao quebrar
 
     if modo == "1": # modo player x player
 
@@ -124,7 +92,7 @@ while True:
             vitoriasJogador1 = 0
             vitoriasJogador2 = 0
             prosseguir = "1"
-            queRenomearPvP = "0" 
+            querRenomearPvP = "0" 
 
             print(f"\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO X HUMANO=-=-=-=-=-=-=\n\n")
 
@@ -377,8 +345,6 @@ while True:
 
                 else:
                     break
-        else:
-            continue # isso aqui volta la no primeiro while, vai pro menu.
 
 
     elif modo == "2":
@@ -495,13 +461,13 @@ while True:
                         escolhaIa1 = "tesoura"
 
                     print(f"a MÁQUINA {nomeIa1} está pensando...")
-                    time.sleep(random.uniform(1,2)) # random.random() gera um valor entre 0.0 e 1.0, random.uniform(a,b) faz entre dois valores a e b
+                    time.sleep(random.uniform(0.5,1)) # random.random() gera um valor entre 0.0 e 1.0, random.uniform(a,b) faz entre dois valores a e b
                     print("...")
-                    time.sleep(random.uniform(1,2))
+                    time.sleep(random.uniform(0.5,1))
                     print("...")
-                    time.sleep(random.uniform(1,2))
+                    time.sleep(random.uniform(0.5,1))
                     print("...")
-                    time.sleep(random.uniform(1,2))
+                    time.sleep(random.uniform(0.5,1))
 
                     print(f"=-=-=Agora é a hora da verdade!=-=-=")
 
@@ -635,6 +601,46 @@ while True:
         continue # <- sera que a prof deixa usar isso aqui também? eu nao sei como voltar ao inicio do while sem ser assim
 
     else:
-        print("\n\nDigita alguma coisa válida né!! Tá achando que eu tenho cara de palhaço?\n")
+        print("\n\nDigita alguma coisa válida, por favor: \n")
         input("Escreva alguma coisa para continuar: \n")
+
+    if modo != "5":
+        print(f"\n=-=-=-=-=-=-=Eai! Bem-vindo ao MELHOR JOKENPÔ DO PLANETA!!!!!=-=-=-=-=-=-=\n")
+        print(f"-------> HUMANO X HUMANO - Quero batalhar com meu amiguinho >:) [1]\n")
+        print(f"-------> HUMANO X MÁQUINA - Quero acabar com TODAS as máquinas!!! [2]\n")
+        print(f"-------> MÁQUINA X MÁQUINA - Quero ver os robôs se detonando [3]\n")
+        print(f"-------> TUTORIAL - Como que joga isso? Me ajuda pelo amor de Deus! [4]\n") # <- perguntar pra prof se pode botar um botão a mais de tutorial, ou se só mete o tutorial antes do jogo msm
+        print(f"-------> SAIR - Eu quero sair, tô bem de boa, Valeu! ^^ [5]\n") 
+        print(f"=-=-=-=-=-=-=-==--===-====-=====-========-=====-====-===--==-=-=-=-=-=-=-=\n")
+
+        modo = input(f"Digite o número da sua opção: ").strip() # isso propositalmente é uma string, pra caso a pessoa digite algo errado o codigo nao quebrar
+
+print("\n=-=-=-=-=-=-=Você escolheu SAIR=-=-=-=-=-=-=\n")
+
+print(f"| {pvpJogados} partidas JxJ jogadas!")
+print(f"    {nome1} ganhou {permaVitoriasPvPJogador1}")
+print(f"    {nome2} ganhou {permaVitoriasPvPJogador2}")
+
+print(f"\n| {pveJogados} partidas JxIA jogadas!")
+print(f"    {nome1} ganhou {permaVitoriasPvEJogador1}")
+print(f"    {nome1} perdeu {permaDerrotasPvEJogador1}") 
+
+print(f"\n| {eveJogados} partidas IAxIA assistidas!")
+print(f"    {nome1} ganhou tantas apostas")
+print(f"    {nome1} perdeu tantas apostas") 
+
+
+if nome1 == "default1" and nome2 == "default2": # se os nomes dos dois jogadores nao foram modificados
+    print(f"Você nem jogou direito e vai sair já?? Tá bom né, até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
+
+elif nome2 == "default2": # se o nome do segundo jogador nao foi modificado
+    
+    print(f"\n\n| {nome1} ganhou {permaVitoriasPvPJogador1} partidas em geral!")
+    print(f"Muito obrigado {nome1} por usar nosso programa de Jokenpô!!! Até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
+
+else: # se os dois nomes foram modificados
+    
+    print(f"| {nome1} ganhou {permaVitoriasPvPJogador1} partidas em geral!")
+    print(f"\n| {nome2} ganhou {permaVitoriasPvPJogador2} partidas em geral!")
+    print(f"Muito obrigado {nome1} e {nome2} por usarem nosso programa de Jokenpô!!! Até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
 
