@@ -58,7 +58,8 @@ permaVitoriasPvPJogador2 = 0
 permaVitoriasPvEJogador1 = 0
 permaDerrotasPvEJogador1 = 0
 
-decisaoEscolhaDeNome = "0" # essa parte do codigo ta completamente uma bosta eu fiz numa confusao maluca tem que dar um revamp nessa joça
+querRenomearPvP = "0" # essa parte do codigo ta completamente uma bosta eu fiz numa confusao maluca tem que dar um revamp nessa joça
+querRenomearPvE = "0"
 
 terminar = False # nos fins dos jogos o usuario pode escolher pra sair do programa, aí isso aqui é definido como True, e no começo do loop principal é checado e da break pra acabar o programa
 voltarMenu = False # Alguns lugares o usuário quer voltar pro menu e fica mais organizado definir uma variavel só pra isso e ir mandando ele por if: {break}
@@ -87,12 +88,12 @@ while True:
         
 
         if nome1 == "default1" and nome2 == "default2": # se os nomes dos dois jogadores nao foram modificados
-            print(f"Você nem jogou direito e vai sair já?? Tá bom né, até mais!!!! :))\n\n")
+            print(f"Você nem jogou direito e vai sair já?? Tá bom né, até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
 
         elif nome2 == "default2": # se o nome do segundo jogador nao foi modificado
             
             print(f"\n\n| {nome1} ganhou {permaVitoriasPvPJogador1} partidas em geral!")
-            print(f"Muito obrigado {nome1} por usar nosso programa de Jokenpô!!! Até mais!!!! :))\n\n")
+            print(f"Muito obrigado {nome1} por usar nosso programa de Jokenpô!!! Até mais!!!! :] \nFeito por Luis Felipe Quintiliano, Larissa Adames, Davi Cagnato\n\n")
 
         else: # se os dois nomes foram modificados
             
@@ -123,14 +124,14 @@ while True:
             vitoriasJogador1 = 0
             vitoriasJogador2 = 0
             prosseguir = "1"
-            decisaoEscolhaDeNome = "0" 
+            queRenomearPvP = "0" 
 
             print(f"\n\n=-=-=-=-=-=-=Você escolheu o modo HUMANO X HUMANO=-=-=-=-=-=-=\n\n")
 
             if voltarMenu == True: # setado no fim da rodada se o usuário optou por voltar ao menu
                 break
 
-            while pvpJogados == 0: # se já jogaram uma partida pvp, o usuario vai cair no else, que vai perguntar se querem trocar de nome ou nao.
+            while pvpJogados == 0 or pveJogados == 0: # se já jogaram uma partida pvp, o usuario vai cair no else, que vai perguntar se querem trocar de nome ou nao.
 
                 if acabouDeNomear == False: # pra evitar repetidas vezes de ficar perguntando o nome, caso algo faça o usuario voltar antes de começar o jogo
                     nome1 = input(f"-------> Jogador 1, por favor digita o seu nome: ")
@@ -144,15 +145,15 @@ while True:
 
                 if acabouDeNomear == False: # pra evitar repetidas vezes de ficar perguntando o nome, caso algo faça o usuario voltar antes de começar o jogo
 
-                    if decisaoEscolhaDeNome == "0": # só entrará aqui se estiver como "0", q é definido no começo do loop acima
+                    if querRenomearPvP == "0": # só entrará aqui se estiver como "0", q é definido no começo do loop acima
 
                         print(f"Eu lembro de vocês {nome1} e {nome2}, vocês querem continuar jogando com esses nomes ou vão trocar?")
-                        print(f"-------> Queremos continuar com nossos nomes! [1]")
-                        print(f"-------> Vamos trocar de nome, por favor! [2]")
+                        print(f"-------> Vamos trocar de nome, por favor! [1]")
+                        print(f"-------> Queremos continuar com nossos nomes! [2]")
                         acabouDeNomear = True
-                        decisaoEscolhaDeNome = input("da a escolha")
+                        querRenomearPvP = input("Digite a sua escolha: ")
 
-                        if decisaoEscolhaDeNome == "2":
+                        if querRenomearPvP == "1":
                             nome1 = input(f"-------> Então tá, Jogador 1, por favor digita o seu novo nome: ")
                             nome2 = input(f"-------> E você Jogador 2, o seu novo nome é: ")
 
@@ -613,15 +614,12 @@ while True:
                 else:
                     break
 
-
-
-
-
-
-        # pôr um while com um timerzinho "pensando..." pra maquina responder
         pass
 
     elif modo == "3":
+
+        print("=-=-=-=-=-=-=Você escolheu o modo MÁQUINA x MÁQUINA=-=-=-=-=-=-=")
+    
         # modo 3, ia x ia
         # fazer opçao de apostas
         pass
