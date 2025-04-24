@@ -148,7 +148,7 @@ while modo != "5":
                 rodadasPraGanhar = int((melhorDeQuantasRodadas + 2)/2) # se for par, calcula a quantidade de rodadas que alguém precisa ganhar para acabar
 
             if melhorDeQuantasRodadas >= 10:
-                print(f"\nCalma lá gente, vocês têm certeza que querem jogar tantas rodadas assim? Pode acabar demorando demais!")
+                print(f"\nCalma lá gente, vocês têm certeza q1ue querem jogar tantas rodadas assim? Pode acabar demorando demais!")
                 time.sleep(1.5)
                 print("\nA gente quer continuar assim mesmo! [1]")
                 print("\nÉ verdade, acho melhor voltar! [2]")
@@ -413,7 +413,7 @@ while modo != "5":
 
                 elif melhorDeQuantasRodadas < 1: # se o numero for MENOR QUE UM, ele manda o pessoal de volta pro menu
                     print(f"\nVocê tá de sacanagem né? Esse número nem faz sentido! Que feio {nome1}! Vou te mandar de volta pro menu >:(\n")
-                    input("Digita alguma coisa pra voltar pro menu >:(")
+                    input("Digita alguma coisa pra voltar pro menu")
                     voltarMenu = True
                     continue
                     
