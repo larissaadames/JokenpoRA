@@ -32,32 +32,49 @@ modo = int(input("Por favor, escolha um modo de jogo: "))
 vitoriasP1 = 0
 vitoriasP2 = 0
 empates = 0
+prosseguir = 0
+
 
 if modo == 1:
     
     print("\n---- Você escolheu o modo HUMANO x HUMANO ----")
 
-    nomeP1 = ("🔵 Jogador 1, por favor digite o seu nome: ")
+    nomeP1 = input("🔵 Jogador 1, por favor digite o seu nome: ")
 
-    nomeP2 = ("🔴 Jogador 2, digite seu nome por favor: ")
+    nomeP2 = input("🔴 Jogador 2, digite seu nome por favor: ")
+    
+    while prosseguir == "continuar" or prosseguir == "1":
+        prosseguir = input(f"Digite a sua escolha: ")
+        if prosseguir == "1" or prosseguir == "continuar":
+            prosseguir = "continuar"
 
+        elif prosseguir == "2" or prosseguir == "sair":
+            prosseguir == "sair"
+            
+            print("Obrigado por jogar e volte sempre!!😉")
+        else:
+            print("Digite algo válido, por favor!")
+        break     
     vezP1 = True # Define a vez do jogador 1
 
     while vezP1 == True: 
 
-        print("\n---- Jogador 1, Qual desses você quer jogar? ----")
+        print(f"\n---- {nomeP1}, Qual desses você quer jogar? ----")
         print("\n---> 🗿 [Pedra] ou [1],\n ---> 🧻 [Papel] ou [2] \n--->✂️ [Tesoura] ou [3] ")
         
         escolhaP1 = input("Escolha: ").lower().strip()
 
         if escolhaP1 == "1" or escolhaP1 == "pedra": # Permite que o usuário escreva a escolha pelo numeral ou pelo nome do objeto, padronizando-os
-            escolhaP1 == "pedra"
+            escolhaP1 = "pedra"
+
 
         elif escolhaP1 == "2" or escolhaP1 == "papel":
-            escolhaP1 == "papel"
+            escolhaP1 = "papel"
+
 
         elif escolhaP1 == "3" or escolhaP1 == "tesoura":
-            escolhaP1 == "tesoura"
+            escolhaP1 = "tesoura"
+
 
         else:
             escolhaP1 = input("Por favor, escolha uma opção válida: ")
@@ -67,18 +84,19 @@ if modo == 1:
     vezP2 = True
     
     while vezP2 == True:
-        print("\n---- Jogador 2, Qual desses você quer jogar? ----")
+        
+        print(f"\n---- {nomeP2}, Qual desses você quer jogar? ----")
         print("\n---> 🗿 [Pedra] ou [1],\n ---> 🧻 [Papel] ou [2] \n--->✂️ [Tesoura] ou [3] ")
         
         escolhaP2 = input("Escolha: ").lower().strip()
         if escolhaP2 == "1" or escolhaP2 == "pedra": # Permite que o usuário escreva a escolha pelo numeral ou pelo nome do objeto, padronizando-os
-            escolhaP2 == "pedra"
+            escolhaP2 = "pedra"
 
         elif escolhaP2 == "2" or escolhaP2 == "papel":
-            escolhaP2 == "papel"
+            escolhaP2 = "papel"
 
         elif escolhaP2 == "3" or escolhaP2 == "tesoura":
-            escolhaP2 == "tesoura"
+            escolhaP2 = "tesoura"
 
         else:
             escolhaP2 = input("Por favor, escolha uma opção válida: ")
@@ -88,20 +106,20 @@ if modo == 1:
     ## vitorias p1
     if escolhaP1 == "pedra" and escolhaP2 == "tesoura":
         print(f"\n{nomeP1} manda PEDRA e destrói completamente a tesoura de {nomeP2}!")
-        time.sleep(2.5)
+        time.sleep(1.5)
         print(f"{nomeP1} ganhou a rodada!")
         time.sleep(0.5)
         vitoriasP1 += 1
 
     elif escolhaP1 == "papel" and escolhaP2 == "pedra":
         print(f"\n{nomeP1} joga PAPEL e amassa totalmente a PEDRA de {nomeP2}!")
-        time.sleep(2.5)
+        time.sleep(1.5)
         print(f"{nomeP1} ganhou a rodada!")
         time.sleep(0.5)
         vitoriasP1 += 1
 
     elif escolhaP1 == "tesoura" and escolhaP2 == "papel":
-        #print historinha
+        print(f"\n {nomeP1} jogou TESOURA e fez picadinhos do papel de {nomeP2}")
         print(f"\n {nomeP1} ganhou a rodada!")
         time.sleep(1.5)
         #print vitoria
@@ -116,26 +134,43 @@ if modo == 1:
     
     ## vitorias p2
     elif escolhaP2 == "pedra" and escolhaP1 == "tesoura":
-        print(f"\n{nomeP2} manda PEDRA e destrói completamente a tesoura de {nomeP1}!")
-        time.sleep(2.5)
+        print(f"\n{nomeP2} joga PEDRA e arrebenta com a TESOURA de {nomeP1}!")
+        time.sleep(1.5)
         print(f"{nomeP2} ganhou a rodada!")
         time.sleep(0.5)
         vitoriasP2 += 1
 
     elif escolhaP2 == "papel" and escolhaP1 == "pedra":
         print(f"\n{nomeP2} joga PAPEL e amassa totalmente a PEDRA de {nomeP1}!")
-        time.sleep(2.5)
+        time.sleep(1.5)
         print(f"{nomeP2} ganhou a rodada!")
         time.sleep(0.5)
         vitoriasP2 += 1
 
     elif escolhaP2 == "tesoura" and escolhaP1 == "papel":
         #print historinha
-        print(f"\n {nomeP2} ganhou a rodada!")
+        print(f"\n {nomeP2} joga TESOURA e faz destroços do PAPEL de {nomeP1}")
         time.sleep(1.5)
         #print vitoria
-        print(f"\n {nomeP2} ganhou!")
+        print(f"\n {nomeP2} ganhou a rodada!")
+        time.sleep(0.5)
+        vitoriasP2 += 1
 
+    print(f"\n=-=-=PLACAR=-=-=") # placar
+    print(f"\n| {nomeP1}: {vitoriasP1}")
+    print(f"\n| {nomeP2}: {vitoriasP2}")
+    print(f"\n| Empates: {empates}")
+    print(f"\n=-=-=-=-=-=-=-=-=\n")
+
+    print("Vocês querem continuar jogando?")
+    print("---> [Continuar] ou [1]")
+    print("---> [Sair] ou [2]")
+    input(": ").lower().strip()
+
+
+    
+
+        
 elif modo == 2:
     print("\n ---- Você escolheu o modo HUMANO x MÁQUINA ----")
     print("")
