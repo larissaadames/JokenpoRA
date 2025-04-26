@@ -1,26 +1,3 @@
-# . O programa deve respeitar as regras do Jokenpô (Pedra ganha da tesoura / Tesoura ganha do papel
-# / Papel ganha da pedra)
-# 2. O jogo possui três modalidades: humano x humano, humano x computador ou computador x
-# computador. A escolha da modalidade deve ser definida no início do programa, e não pode ser
-# modificada ao longo da execução.
-# 3. Após a escolha da modalidade, o jogo pode ter inúmeras partidas, ao final de cada partidas o
-# programa deve perguntar se o jogador quer CONTINUAR ou SAIR.
-# 4. Em cada partida o programa deve, solicitar a jogada (PEDRA, PAPEL OU TESOURA) se o jogador for
-# humano ou gerar a jogada de forma randômica se o jogador for computador. Após coletar as
-# jogadas, o programa deve indicar quem foi o vencedor e mostrar o placar geral.
-# 5. Caso o jogador deseje CONTINUAR, o programa deve começar mais uma partida. Caso o jogador
-# deseje SAIR, o programa deve exibir o placar geral e apresentar uma mensagem de agradecimento
-# com os nomes dos estudantes.
-# 6. O código do programa deve estar documentado e pode ser implementado em grupos de 2 ou 3
-# pessoas.
-# 7. Os estudantes devem ter domínio sobre todo o código, será realizado um teste de autoria nas
-# entregas para avaliar o domínio de cada estudante. Em caso de cópia ou plágio, a nota atribuída
-# a atividade será zero.
-# 8. Data de Entrega: 23/04/2025 no CANVAS.
-# Atividade somativa
-
-
-
 import time
 import random
 
@@ -105,7 +82,7 @@ if modo == 1:
                     (____)
         -   --._____(___)
         """)
-        time.sleep(0.5)
+        time.sleep(0.8)
 
         print("""
             KEN
@@ -116,7 +93,7 @@ if modo == 1:
                 _______)
         ---.__________)
         """)
-        time.sleep(0.5)
+        time.sleep(0.8)
 
         print("""
             PÔ
@@ -127,21 +104,21 @@ if modo == 1:
                 (____)
             ---.(___)                        
         """)
-        time.sleep(0.5)
+        time.sleep(0.8)
 
         ## vitorias p1
         if escolhaP1 == "pedra" and escolhaP2 == "tesoura":
             print(f"\n{nomeP1} manda PEDRA 🗿 e destrói completamente a TESOURA ✂️ de {nomeP2}!")
             time.sleep(1.5)
             print(f"🔵 {nomeP1} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasP1 += 1
 
         elif escolhaP1 == "papel" and escolhaP2 == "pedra":
             print(f"\n{nomeP1} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {nomeP2}!")
             time.sleep(1.5)
             print(f"🔵 {nomeP1} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasP1 += 1
 
         elif escolhaP1 == "tesoura" and escolhaP2 == "papel":
@@ -156,6 +133,7 @@ if modo == 1:
             print(f"\nOs dois escolheram {escolhaP1}")
             time.sleep(1.0)
             print(f"\nFoi um empate")
+            time.sleep(1.0)
             empates += 1
         
         ## vitorias p2
@@ -163,23 +141,21 @@ if modo == 1:
             print(f"\n{nomeP2} joga PEDRA 🗿 e arrebenta com a TESOURA ✂️ de {nomeP1}!")
             time.sleep(1.5)
             print(f"🔴 {nomeP2} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasP2 += 1
 
         elif escolhaP2 == "papel" and escolhaP1 == "pedra":
             print(f"\n{nomeP2} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {nomeP1}!")
             time.sleep(1.5)
             print(f"🔴 {nomeP2} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasP2 += 1
 
         elif escolhaP2 == "tesoura" and escolhaP1 == "papel":
-            #print historinha
             print(f"\n {nomeP2} joga TESOURA ✂️ e faz destroços do PAPEL 🧻 de {nomeP1}")
             time.sleep(1.5)
-            #print vitoria
             print(f"\n🔴 {nomeP2} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasP2 += 1
 
         print(f"\n=-=-=PLACAR=-=-=") # placar
@@ -188,9 +164,7 @@ if modo == 1:
         print(f"\n| Empates: {empates}")
         print(f"\n=-=-=-=-=-=-=-=-=\n")
 
-        time.sleep(1)
-
-        time.sleep(0.5)
+        time.sleep(1.5)
 
         while prosseguir == "continuar":
             print("Vocês querem continuar jogando?")
@@ -298,20 +272,21 @@ elif modo == 2:
             print(f"\n{nomeP1} manda PEDRA 🗿 e destrói completamente a TESOURA ✂️  de {robo}!")
             time.sleep(1.5)
             print(f"🔵 {nomeP1} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasP1 += 1
 
         elif escolhaP1 == "papel" and escolhaRobo == "pedra":
             print(f"\n{nomeP1} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {robo}!")
             time.sleep(1.5)
             print(f"🔵 {nomeP1} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasP1 += 1
 
         elif escolhaP1 == "tesoura" and escolhaRobo == "papel":
             print(f"\n {nomeP1} jogou TESOURA ✂️  e fez picadinhos do PAPEL 🧻 de {robo}")
             time.sleep(1.5)
             print(f"\n {nomeP1} ganhou!")
+            time.sleep(1)
             vitoriasP1 += 1
 
     ## empates
@@ -319,6 +294,7 @@ elif modo == 2:
             print(f"\n Os dois escolheram {escolhaP1}")
             time.sleep(1.0)
             print(f"\n Foi um empate")
+            time.sleep(1.0)
             empates += 1
         
     ## vitorias robo
@@ -326,14 +302,14 @@ elif modo == 2:
             print(f"\n{robo} joga PEDRA 🗿 e arrebenta com a TESOURA ✂️  de {nomeP1}!")
             time.sleep(1.5)
             print(f"🔴 {robo} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo += 1
 
         elif escolhaRobo == "papel" and escolhaP1 == "pedra":
             print(f"\n{robo} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {nomeP1}!")
             time.sleep(1.5)
             print(f"🔴 {robo} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo += 1
 
         elif escolhaRobo == "tesoura" and escolhaP1 == "papel":
@@ -342,7 +318,7 @@ elif modo == 2:
             time.sleep(1.5)
             #print vitoria
             print(f"\n🔴 {robo} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo += 1
 
 
@@ -351,6 +327,8 @@ elif modo == 2:
         print(f"\n| {robo}: {vitoriasRobo}")
         print(f"\n| Empates: {empates}")
         print(f"\n=-=-=-=-=-=-=-=-=\n")
+
+        time.sleep(1.5)
 
         while prosseguir == "continuar":
             print("Você quer continuar jogando?")
@@ -378,6 +356,7 @@ elif modo == 3:
     vitoriasRobo2 = 0
     
     print("\n ---- Você escolheu o modo MÁQUINA 🤖 x MÁQUINA 🤖 ----")
+    time.sleep(1)
     print("""
         JO
             _______
@@ -439,14 +418,14 @@ elif modo == 3:
             print(f"\n{robo1} manda PEDRA 🗿 e destrói completamente a TESOURA ✂️  de {robo2}!")
             time.sleep(1.5)
             print(f"🔵 {robo1} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo1 += 1
         
         elif escolhaRobo1 == "papel" and escolhaRobo2 == "pedra":
             print(f"\n{robo1} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {robo2}!")
             time.sleep(1.5)
             print(f"🔵 {robo1} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo1 += 1
 
         elif escolhaRobo1 == "tesoura" and escolhaRobo2 == "papel":
@@ -467,7 +446,7 @@ elif modo == 3:
             print(f"\n{robo2} joga PEDRA 🗿 e arrebenta com a TESOURA ✂️  de {robo1}!")
             time.sleep(1.5)
             print(f"🔴 {robo2} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo2 += 1
 
 
@@ -475,14 +454,14 @@ elif modo == 3:
             print(f"\n{robo2} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {robo1}!")
             time.sleep(1.5)
             print(f"🔵 {robo2} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo2 += 1
 
         elif escolhaRobo2 == "tesoura" and escolhaRobo1 == "papel":
             print(f"\n {robo2} joga TESOURA ✂️  e faz destroços do PAPEL 🧻 de {robo1}")
             time.sleep(1.5)
             print(f"\n🔴 {robo2} ganhou a rodada!")
-            time.sleep(0.5)
+            time.sleep(1)
             vitoriasRobo2 += 1
 
         print(f"\n=-=-=PLACAR=-=-=") # placar
@@ -491,8 +470,10 @@ elif modo == 3:
         print(f"\n| Empates: {empates}")
         print(f"\n=-=-=-=-=-=-=-=-=\n")
 
+        time.sleep(1.5)
+
         while prosseguir == "continuar":
-                    print("Você quer continuar jogando?")
+                    print("Você quer continuar assistindo?")
                     print("\n---> [Continuar] ou [1]")
                     print("\n---> [Sair] ou [2]\n")
                     prosseguir = input("Escolha : ").lower().strip()
