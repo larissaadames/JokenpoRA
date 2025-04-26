@@ -9,7 +9,7 @@ modo = int(input("Por favor, escolha um modo de jogo: "))
 vitoriasP1 = 0
 vitoriasP2 = 0
 empates = 0
-prosseguir = "continuar"
+prosseguir = "continuar" # váriavb
 continuar = 0
 sair = 0
 
@@ -21,7 +21,7 @@ if modo == 1:
 
     nomeP2 = input("\n🔴 Jogador 2, digite seu nome por favor: ")
     
-    while prosseguir == "continuar":
+    while prosseguir == "continuar": # váriavel que verifica se o jogador decidiu continuar no jogo
 
         vezP1 = True # Define a vez do jogador 1
 
@@ -134,7 +134,7 @@ if modo == 1:
             time.sleep(1.0)
             print(f"\nFoi um empate")
             time.sleep(1.0)
-            empates += 1
+
         
         ## vitorias p2
         elif escolhaP2 == "pedra" and escolhaP1 == "tesoura":
@@ -199,7 +199,40 @@ elif modo == 2:
 
     nomeP1 = input("\n🔵 Jogador 1, por favor digite o seu nome: ")
         
-    while prosseguir == "continuar":
+    while prosseguir == "continuar": # váriavel que verifica se o jogador decidiu continuar no jogo
+
+        print("""
+            JO
+                _______
+            ---'   ____)
+                    (_____)
+                    (_____) 
+                    (____)
+        -   --._____(___)
+        """)
+        time.sleep(0.8)
+
+        print("""
+            KEN
+            _______
+        ---'   ____)__
+                ______)
+                _______)
+                _______)
+        ---.__________)
+        """)
+        time.sleep(0.8)
+
+        print("""
+            PÔ
+            _______
+        ---'   ____)____
+                    ______)
+                    ________)
+                (____)
+            ---.(___)                        
+        """)
+        time.sleep(0.8)
 
         escolhaRobo = random.randint(1,3)
 
@@ -215,43 +248,8 @@ elif modo == 2:
             
             escolhaRobo = "tesoura"
         
+
         vezP1 = True # Define a vez do jogador 1
-
-
-        print("""
-            JO
-                _______
-            ---'   ____)
-                    (_____)
-                    (_____) 
-                    (____)
-        -   --._____(___)
-        """)
-        time.sleep(0.5)
-
-        print("""
-            KEN
-            _______
-        ---'   ____)__
-                ______)
-                _______)
-                _______)
-        ---.__________)
-        """)
-        time.sleep(0.5)
-
-        print("""
-            PÔ
-            _______
-        ---'   ____)____
-                    ______)
-                    ________)
-                (____)
-            ---.(___)                        
-        """)
-        time.sleep(0.5)
-
-        
         while vezP1 == True:
             print(f"\n---- {nomeP1}, Qual desses você quer jogar? ----")
             print("\n---> 🗿 [Pedra] ou [1],\n---> 🧻 [Papel] ou [2] \n---> ✂️  [Tesoura] ou [3] ")
@@ -388,10 +386,10 @@ elif modo == 3:
             (____)
         ---.(___)                        
     """)
-    time.sleep(0.8)
+    time.sleep(1.5)
 
 
-    while prosseguir == "continuar":
+    while prosseguir == "continuar": # váriavel que verifica se o jogador decidiu continuar no jogo
 
         escolhaRobo1 = random.randint(1,3)
         if escolhaRobo1 == 1: # define como pedra, papel, ou tesoura pra facilitar a leitura do codigo
@@ -416,16 +414,16 @@ elif modo == 3:
         # vitorias robo1
         if escolhaRobo1 == "pedra" and escolhaRobo2 == "tesoura":
             print(f"\n{robo1} manda PEDRA 🗿 e destrói completamente a TESOURA ✂️  de {robo2}!")
-            time.sleep(1.5)
+            time.sleep(2.0)
             print(f"🔵 {robo1} ganhou a rodada!")
-            time.sleep(1)
+            time.sleep(1.5)
             vitoriasRobo1 += 1
         
         elif escolhaRobo1 == "papel" and escolhaRobo2 == "pedra":
             print(f"\n{robo1} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {robo2}!")
-            time.sleep(1.5)
+            time.sleep(2.0)
             print(f"🔵 {robo1} ganhou a rodada!")
-            time.sleep(1)
+            time.sleep(1.5)
             vitoriasRobo1 += 1
 
         elif escolhaRobo1 == "tesoura" and escolhaRobo2 == "papel":
@@ -437,31 +435,31 @@ elif modo == 3:
         # empate
         elif escolhaRobo1 == escolhaRobo2:
             print(f"\n Os dois escolheram {escolhaRobo1}")
-            time.sleep(1.0)
+            time.sleep(2.0)
             print(f"\n Foi um empate")
             empates += 1
 
         # vitorias robo2
         elif escolhaRobo2 == "pedra" and escolhaRobo1 == "tesoura":
             print(f"\n{robo2} joga PEDRA 🗿 e arrebenta com a TESOURA ✂️  de {robo1}!")
-            time.sleep(1.5)
+            time.sleep(2.0)
             print(f"🔴 {robo2} ganhou a rodada!")
-            time.sleep(1)
+            time.sleep(1.5)
             vitoriasRobo2 += 1
 
 
         elif escolhaRobo2 == "papel" and escolhaRobo1 == "pedra":
             print(f"\n{robo2} joga PAPEL 🧻 e amassa totalmente a PEDRA 🗿 de {robo1}!")
-            time.sleep(1.5)
+            time.sleep(2.0)
             print(f"🔵 {robo2} ganhou a rodada!")
-            time.sleep(1)
+            time.sleep(1.5)
             vitoriasRobo2 += 1
 
         elif escolhaRobo2 == "tesoura" and escolhaRobo1 == "papel":
             print(f"\n {robo2} joga TESOURA ✂️  e faz destroços do PAPEL 🧻 de {robo1}")
-            time.sleep(1.5)
+            time.sleep(2.0)
             print(f"\n🔴 {robo2} ganhou a rodada!")
-            time.sleep(1)
+            time.sleep(1.5)
             vitoriasRobo2 += 1
 
         print(f"\n=-=-=PLACAR=-=-=") # placar
@@ -473,25 +471,19 @@ elif modo == 3:
         time.sleep(1.5)
 
         while prosseguir == "continuar":
-                    print("Você quer continuar assistindo?")
-                    print("\n---> [Continuar] ou [1]")
-                    print("\n---> [Sair] ou [2]\n")
-                    prosseguir = input("Escolha : ").lower().strip()
+            print("Você quer continuar assistindo?")
+            print("\n---> [Continuar] ou [1]")
+            print("\n---> [Sair] ou [2]\n")
+            prosseguir = input("Escolha : ").lower().strip()
 
-                    if prosseguir == "1" or prosseguir == "continuar":
-                        prosseguir = "continuar"
-                        break
+            if prosseguir == "1" or prosseguir == "continuar":
+                prosseguir = "continuar"
+                break
 
-                    elif prosseguir == "2" or prosseguir == "sair":
-                        prosseguir == "sair"
-                        print("Obrigado por jogar nosso jokenpô!! Volte sempre! 😉 \nFeito por: Larissa Adames, Luis Felipe Quintiliano, Davi Cagnato")
-                    else:
-                        print("Digite algo válido, por favor!")
-                        prosseguir = "continuar"
-                        time.sleep(0.5)
-
-
-
-
-
-
+            elif prosseguir == "2" or prosseguir == "sair":
+                prosseguir == "sair"
+                print("Obrigado por jogar nosso jokenpô!! Volte sempre! 😉 \nFeito por: Larissa Adames, Luis Felipe Quintiliano, Davi Cagnato")
+            else:
+                print("Digite algo válido, por favor!")
+                prosseguir = "continuar"
+                time.sleep(1.0)
