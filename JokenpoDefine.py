@@ -134,6 +134,7 @@ if modo == 1:
             time.sleep(1.0)
             print(f"\nFoi um empate")
             time.sleep(1.0)
+            empates += 1
 
         
         ## vitorias p2
