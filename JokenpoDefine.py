@@ -1,3 +1,6 @@
+#video explicação do código:
+#https://www.youtube.com/watch?v=DLbroPOB4ek
+
 import time
 import random
 
